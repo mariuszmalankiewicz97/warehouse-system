@@ -2,13 +2,16 @@ stock = []
 
 
 def add_product():
-    name = input("Name product: ")
-    price = input("Price product: ")
-    amount = input("Amount product: ")
-    product = {}
-    product[name] = {"price": price, "amount": amount}
-    stock.append(product)
-    print(f"Product add success: {product}")
+    try:
+        name = input("Name product: ")
+        price = float(input("Price product: "))
+        amount = int(input("Amount product: "))
+        product = {}
+        product[name] = {"price": price, "amount": amount}
+        stock.append(product)
+        print(f"\nProduct add success: {product}\n")
+    except ValueError:
+        print("\nPrice and amount must be a number\n")
 
 
 def view_products():
@@ -19,55 +22,64 @@ def view_products():
 
 
 def delete_product():
-    found = False
-    name = input("Name product to delete: ")
-    for product in stock:
-        if name in product:
-            del product[name]
-            found = True
-            print(f"\nProduct delete success: {name}\n")
-            break
-    if found == False:
-        print(f"\nProduct: '{name}' not found\n")
+    if len(stock) != 0:
+        found = False
+        name = input("\nName product to delete: ")
+        for product in stock:
+            if name in product:
+                found = True
+                del product[name]
+                print(f"\nProduct delete success: {name}\n")
+                break
+        if found == False:
+            print(f"\nProduct: '{name}' not found\n")
+    else:
+        print("\nWerehouse is empty\n")
 
 
 def update_product():
-    found = False
-    name = input("\nname product: ")
-    for product in stock:
-        if name in product:
-            current_amount = product[name]["amount"]
-            print(f"\nCurrent amount: {current_amount} \n")
-            new_amount = input("New amount: ")
-            product[name] = {
-                "price": product[name]["price"],
-                "amount": new_amount,
-            }
-            found = True
-            print(f"Product '{name}' succes update")
-            break
-    if found == False:
-        print(f"\nProduct '{name}' not found\n")
+    if len(stock) != 0:
+        found = False
+        name = input("\nname product: ")
+        for product in stock:
+            if name in product:
+                try:
+                    current_amount = product[name]["amount"]
+                    print(f"\nCurrent amount: {current_amount} \n")
+                    new_amount = int(input("New amount: "))
+                    found = True
+                    product[name] = {
+                        "price": product[name]["price"],
+                        "amount": new_amount,
+                    }
+                    print(f"\nProduct '{name}' succes update\n")
+                    break
+                except ValueError:
+                    print("\nAmount must be intiger\n")
+        if found == False:
+            print(f"\nProduct '{name}' not found\n")
+    else:
+        print("\nWerehouse is empty\n")
 
 
 while True:
-    menu = int(input("""Werehouse Menu:
+    try:
+        menu = int(input("""\nWerehouse Menu:
 1) Add product
 2) View products
 3) Del product
 4) Change amount product
-9) Exit 
+0) Exit 
 Your choose: """))
-    if menu == 1:
-        add_product()
-    elif menu == 2:
-        view_products()
-    elif menu == 3:
-        delete_product()
-    elif menu == 4:
-        update_product()
-    elif menu == 9:
-        break
-    else:
-        print("\nChoose from 1 to 4 or 9 to exit\n")
-        continue
+        if menu == 1:
+            add_product()
+        elif menu == 2:
+            view_products()
+        elif menu == 3:
+            delete_product()
+        elif menu == 4:
+            update_product()
+        elif menu == 0:
+            break
+    except ValueError:
+        print("\nProgram akcept only intiger from 1 to 4 and 0 for exit\n")
