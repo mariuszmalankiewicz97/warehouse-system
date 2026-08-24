@@ -1,6 +1,10 @@
-# werehouse-system
+# Warehouse System
 
-A Python project for managing werehouse operations.
+A Python project for managing warehouse operations.
+
+## Technologies
+
+- Python
 
 ## Features
 
@@ -9,16 +13,23 @@ A Python project for managing werehouse operations.
 - Delete product
 - Change product amount
 
-## Technologies
+## How it works
 
-- Python
+The application runs in the terminal and allows the user to manage warehouse products through a simple menu.
 
-## Project purpose
+Each product contains:
+- Product name
+- Price
+- Amount
 
-The project was created to practice Python fundamentals,
-especially dictionaries, tuples, loops, conditional statements,
-user input and CRUD operations.
+## Setup
 
-## Status
+Clone the repository:
 
-The project is currently under development.
+```bash
+git clone https://github.com/mariuszmalankiewicz97/warehouse-system.git
+
+cd weaehouse-system
+
+python main.py
+```
