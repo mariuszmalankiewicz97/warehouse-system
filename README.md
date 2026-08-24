@@ -29,7 +29,7 @@ Clone the repository:
 ```bash
 git clone https://github.com/mariuszmalankiewicz97/warehouse-system.git
 
-cd weaehouse-system
+cd werehouse-system
 
 python main.py
 ```
