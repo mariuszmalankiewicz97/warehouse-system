@@ -21,14 +21,15 @@ Your choose: """))
             print(f"Product: {product}")
     if menu == 3:
         name = input("Name product to delete: ")
-        for product in stock:
-            if product in stock:
+        if name in stock:
+            for product in stock:
                 del product[name]
                 print(f"\nProduct delete success: {name}\n")
+        print(f"\nProduct: '{name}' not found\n")
     if menu == 4:
         name = input("\nname product: ")
-        for product in stock:
-            if product in stock:
+        if name in stock:
+            for product in stock:
                 current_amount = product[name]["amount"]
                 print(f"\nCurrent amount: {current_amount} \n")
                 new_amount = input("New amount: ")
@@ -36,5 +37,6 @@ Your choose: """))
                     "price": product[name]["price"],
                     "amount": new_amount,
                 }
+        print(f"\nProduct '{name}' not found\n")
     if menu == 9:
         break
