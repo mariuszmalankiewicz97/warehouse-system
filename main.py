@@ -4,14 +4,18 @@ stock = []
 
 
 def load_from_json():
-    with open("product.json", "r") as f:
-        products = json.load(f)
-        for product in products:
-            stock.append(product)
+    try:
+        with open("products.json", "r") as f:
+            products = json.load(f)
+            for product in products:
+                stock.append(product)
+    except FileNotFoundError:
+        save_to_json()
+        print(f"\nFile name 'products.json' don't exist!, I create for you.\n")
 
 
 def save_to_json():
-    with open("product.json", "w") as f:
+    with open("products.json", "w") as f:
         json.dump(stock, f, indent=4)
 
 
