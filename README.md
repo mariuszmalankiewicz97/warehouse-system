@@ -5,6 +5,7 @@ A Python project for managing warehouse operations.
 ## Technologies
 
 - Python
+- Json
 
 ## Features
 
@@ -12,6 +13,7 @@ A Python project for managing warehouse operations.
 - View products
 - Delete product
 - Change product amount
+- Save and load data to json
 
 ## How it works
 
@@ -22,14 +24,23 @@ Each product contains:
 - Price
 - Amount
 
+Example:
+
+```json
+{
+    "laptop": {
+        "price": 5599.99,
+        "amount": 11
+    }
+}
+```
+
 ## Setup
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/mariuszmalankiewicz97/warehouse-system.git
-
-cd werehouse-system
-
+cd warehouse-system
 python main.py
 ```
