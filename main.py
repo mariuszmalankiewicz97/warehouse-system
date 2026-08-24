@@ -1,4 +1,18 @@
+import json
+
 stock = []
+
+
+def load_from_json():
+    with open("product.json", "r") as f:
+        products = json.load(f)
+        for product in products:
+            stock.append(product)
+
+
+def save_to_json():
+    with open("product.json", "w") as f:
+        json.dump(stock, f, indent=4)
 
 
 def add_product():
@@ -9,6 +23,7 @@ def add_product():
         product = {}
         product[name] = {"price": price, "amount": amount}
         stock.append(product)
+        save_to_json()
         print(f"\nProduct add success: {product}\n")
     except ValueError:
         print("\nPrice and amount must be a number\n")
@@ -28,7 +43,9 @@ def delete_product():
         for product in stock:
             if name in product:
                 found = True
+                print(f"\n-----{product}----\n")
                 del product[name]
+                save_to_json()
                 print(f"\nProduct delete success: {name}\n")
                 break
         if found == False:
@@ -52,6 +69,7 @@ def update_product():
                         "price": product[name]["price"],
                         "amount": new_amount,
                     }
+                    save_to_json()
                     print(f"\nProduct '{name}' succes update\n")
                     break
                 except ValueError:
@@ -62,6 +80,8 @@ def update_product():
         print("\nWerehouse is empty\n")
 
 
+load_from_json()
+
 while True:
     try:
         menu = int(input("""\nWerehouse Menu:
@@ -69,7 +89,7 @@ while True:
 2) View products
 3) Del product
 4) Change amount product
-0) Exit 
+0) Exit
 Your choose: """))
         if menu == 1:
             add_product()
