@@ -50,7 +50,7 @@ def delete_product():
         found = False
         name = input("\nName product to delete: ")
         for product in stock:
-            if name in product:
+            if name == product.name:
                 found = True
                 stock.remove(product)
                 save_to_json()
