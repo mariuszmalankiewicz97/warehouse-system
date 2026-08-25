@@ -36,12 +36,12 @@ def add_product():
 def view_products():
     for product in stock:
         print(f"Product: {product}")
-    if len(stock) == 0:
+    if not stock:
         print("\nWerehouse is empty\n")
 
 
 def delete_product():
-    if len(stock) != 0:
+    if stock:
         found = False
         name = input("\nName product to delete: ")
         for product in stock:
@@ -52,14 +52,14 @@ def delete_product():
                 save_to_json()
                 print(f"\nProduct delete success: {name}\n")
                 break
-        if found == False:
+        if not found:
             print(f"\nProduct: '{name}' not found\n")
     else:
         print("\nWerehouse is empty\n")
 
 
 def update_product():
-    if len(stock) != 0:
+    if stock:
         found = False
         name = input("\nname product: ")
         for product in stock:
@@ -78,7 +78,7 @@ def update_product():
                     break
                 except ValueError:
                     print("\nAmount must be intiger\n")
-        if found == False:
+        if not found:
             print(f"\nProduct '{name}' not found\n")
     else:
         print("\nWerehouse is empty\n")
