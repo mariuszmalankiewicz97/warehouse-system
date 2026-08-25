@@ -27,12 +27,16 @@ Each product contains:
 Example:
 
 ```json
-{
-    "laptop": {
+[
+    {   "name": "laptop", 
         "price": 5599.99,
         "amount": 11
+    },
+    {   "name": "mouse", 
+        "price": 312,
+        "amount": 513
     }
-}
+[
 ```
 
 ## Setup
