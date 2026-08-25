@@ -47,8 +47,7 @@ def delete_product():
         for product in stock:
             if name in product:
                 found = True
-                print(f"\n-----{product}----\n")
-                del product[name]
+                stock.remove(product)
                 save_to_json()
                 print(f"\nProduct delete success: {name}\n")
                 break
