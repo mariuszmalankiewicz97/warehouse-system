@@ -1,5 +1,7 @@
 import json
 
+from product import Product
+
 stock = []
 
 
@@ -7,7 +9,8 @@ def load_from_json():
     try:
         with open("products.json", "r") as f:
             products = json.load(f)
-            for product in products:
+            for dict in products:
+                product = Product(dict["name"], dict["price"], dict["amount"])
                 stock.append(product)
     except FileNotFoundError:
         save_to_json()
@@ -15,8 +18,11 @@ def load_from_json():
 
 
 def save_to_json():
+    temp_stock = []
+    for product in stock:
+        temp_stock.append(product.__dict__)
     with open("products.json", "w") as f:
-        json.dump(stock, f, indent=4)
+        json.dump(temp_stock, f, indent=4)
 
 
 def add_product():
@@ -24,8 +30,7 @@ def add_product():
         name = input("Name product: ")
         price = float(input("Price product: "))
         amount = int(input("Amount product: "))
-        product = {}
-        product[name] = {"price": price, "amount": amount}
+        product = Product(name, price, amount)
         stock.append(product)
         save_to_json()
         print(f"\nProduct add success: {product}\n")
