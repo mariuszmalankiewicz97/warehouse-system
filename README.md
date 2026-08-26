@@ -12,7 +12,11 @@ A Python project for managing warehouse operations.
 - Add product
 - View products
 - Delete product
-- Change product amount
+- Change amount product
+- Change price product
+- Increase amount product
+- Decrease amount product
+- Total value product
 - Save and load data to json
 
 ## How it works
