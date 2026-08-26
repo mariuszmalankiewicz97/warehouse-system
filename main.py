@@ -67,16 +67,13 @@ def update_product():
         found = False
         name = input("\nname product: ")
         for product in stock:
-            if name in product:
+            if name == product.name:
                 try:
-                    current_amount = product[name]["amount"]
+                    current_amount = product.amount
                     print(f"\nCurrent amount: {current_amount} \n")
                     new_amount = int(input("New amount: "))
                     found = True
-                    product[name] = {
-                        "price": product[name]["price"],
-                        "amount": new_amount,
-                    }
+                    product.update_amount(new_amount)
                     save_to_json()
                     print(f"\nProduct '{name}' succes update\n")
                     break
