@@ -9,8 +9,10 @@ def load_from_json():
     try:
         with open("products.json", "r") as f:
             products = json.load(f)
-            for dict in products:
-                product = Product(dict["name"], dict["price"], dict["amount"])
+            for product_data in products:
+                product = Product(
+                    product_data["name"], product_data["price"], product_data["amount"]
+                )
                 stock.append(product)
     except FileNotFoundError:
         save_to_json()
