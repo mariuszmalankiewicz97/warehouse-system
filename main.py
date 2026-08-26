@@ -28,23 +28,6 @@ def save_to_json():
         json.dump(temp_stock, f, indent=4)
 
 
-# def delete_product():
-#     if stock:
-#         found = False
-#         name = input("\nName product to delete: ")
-#         for product in stock:
-#             if name == product.name:
-#                 found = True
-#                 stock.remove(product)
-#                 save_to_json()
-#                 print(f"\nProduct delete success: {name}\n")
-#                 break
-#         if not found:
-#             print(f"\nProduct: '{name}' not found\n")
-#     else:
-#         print("\nWerehouse is empty\n")
-
-
 # def change_amount_product():
 #     if stock:
 #         found = False
@@ -186,8 +169,10 @@ Your choose: """))
                 print("\nPrice and amount must be a number\n")
         elif menu == 2:
             warehouse.view_products()
-        # elif menu == 3:
-        #     delete_product()
+        elif menu == 3:
+            name = input("\nName product to delete: ")
+            warehouse.delete_product(name)
+            save_to_json()
         # elif menu == 4:
         #     change_amount_product()
         # elif menu == 5:
