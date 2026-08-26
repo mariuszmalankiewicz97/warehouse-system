@@ -173,7 +173,8 @@ Your choose: """))
         elif menu == 3:
             if warehouse.check_stock():
                 name = input("\nName product to delete: ")
-                warehouse.delete_product(name)
+                warehouse.find_product(name)
+                warehouse.delete_product(product)
                 save_to_json()
         # elif menu == 4:
         #     change_amount_product()
