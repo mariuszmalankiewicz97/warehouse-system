@@ -6,16 +6,10 @@ class Warehouse:
         self.stock.append(product)
 
     def view_products(self):
-        if not self.stock:
-            print("\nWarehouse is empty\n")
-            return
         for product in self.stock:
             print(f"Product: {product}")
 
     def delete_product(self, name):
-        if not self.stock:
-            print("\nWarehouse is empty\n")
-            return
         found = False
         for product in self.stock:
             if name == product.name:
@@ -25,3 +19,9 @@ class Warehouse:
                 break
         if not found:
             print(f"\nProduct: '{name}' not found\n")
+
+    def check_stock(self):
+        if not self.stock:
+            print("\nWarehouse is empty\n")
+            return False
+        return True

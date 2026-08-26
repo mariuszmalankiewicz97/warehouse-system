@@ -168,11 +168,13 @@ Your choose: """))
             except ValueError:
                 print("\nPrice and amount must be a number\n")
         elif menu == 2:
-            warehouse.view_products()
+            if warehouse.check_stock():
+                warehouse.view_products()
         elif menu == 3:
-            name = input("\nName product to delete: ")
-            warehouse.delete_product(name)
-            save_to_json()
+            if warehouse.check_stock():
+                name = input("\nName product to delete: ")
+                warehouse.delete_product(name)
+                save_to_json()
         # elif menu == 4:
         #     change_amount_product()
         # elif menu == 5:
