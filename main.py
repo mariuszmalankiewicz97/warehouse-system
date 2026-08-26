@@ -28,13 +28,6 @@ def save_to_json():
         json.dump(temp_stock, f, indent=4)
 
 
-# def view_products():
-#     for product in stock:
-#         print(f"Product: {product}")
-#     if not stock:
-#         print("\nWerehouse is empty\n")
-
-
 # def delete_product():
 #     if stock:
 #         found = False
@@ -191,8 +184,8 @@ Your choose: """))
                 print(f"\nProduct add: {product}\n")
             except ValueError:
                 print("\nPrice and amount must be a number\n")
-        # elif menu == 2:
-        #     view_products()
+        elif menu == 2:
+            warehouse.view_products()
         # elif menu == 3:
         #     delete_product()
         # elif menu == 4:
