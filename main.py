@@ -107,7 +107,7 @@ def change_price_product():
                     )
                     break
                 except ValueError:
-                    print("\Price must be a float\n")
+                    print("\nPrice must be a float\n")
         if not found:
             print(f"\nProduct '{name}' not found\n")
     else:
