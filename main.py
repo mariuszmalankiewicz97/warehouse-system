@@ -160,6 +160,21 @@ def decrease_amount_product():
         print(f"\nProduct '{name}' not found\n")
 
 
+def total_value_product():
+    if not stock:
+        print("\nWarehouse is empty\n")
+        return
+    name = input("Product name: ")
+    found = False
+    for product in stock:
+        if name == product.name:
+            found = True
+            print(f"\nTotal value product '{name}': {product.total_value()}\n")
+            break
+    if not found:
+        print(f"\nProduct name '{name}' not found")
+
+
 load_from_json()
 
 while True:
@@ -172,6 +187,7 @@ while True:
 5) Change price product
 6) Increase amount product
 7) Decrease amount product
+8) Total value product
 0) Exit
 Your choose: """))
         if menu == 1:
@@ -188,7 +204,9 @@ Your choose: """))
             increase_amount_product()
         elif menu == 7:
             decrease_amount_product()
+        elif menu == 8:
+            total_value_product()
         elif menu == 0:
             break
     except ValueError:
-        print("\nProgram akcept only intiger from 1 to 5 and 0 for exit\n")
+        print("\nProgram akcept only intiger from 1 to 8 and 0 for exit\n")

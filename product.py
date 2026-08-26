@@ -21,3 +21,6 @@ class Product:
         if self.amount - amount < 0:
             raise ValueError("Amount can't be under 0")
         self.amount -= amount
+
+    def total_value(self):
+        return self.amount * self.price
