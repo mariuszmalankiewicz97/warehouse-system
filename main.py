@@ -85,6 +85,31 @@ def update_product():
         print("\nWerehouse is empty\n")
 
 
+def change_price_product():
+    if stock:
+        found = False
+        name = input("\nname product: ")
+        for product in stock:
+            if name == product.name:
+                try:
+                    current_price = product.price
+                    print(f"\nCurrent price: {current_price} \n")
+                    found = True
+                    new_price = float(input("New price: "))
+                    product.update_price(new_price)
+                    save_to_json()
+                    print(
+                        f"\nProduct '{name}' price succes update from {current_price} on {new_price}\n"
+                    )
+                    break
+                except ValueError:
+                    print("\nAmount must be float\n")
+        if not found:
+            print(f"\nProduct '{name}' not found\n")
+    else:
+        print("\nWerehouse is empty\n")
+
+
 load_from_json()
 
 while True:
@@ -94,6 +119,7 @@ while True:
 2) View products
 3) Del product
 4) Change amount product
+5) Change price product
 0) Exit
 Your choose: """))
         if menu == 1:
@@ -104,7 +130,9 @@ Your choose: """))
             delete_product()
         elif menu == 4:
             update_product()
+        elif menu == 5:
+            change_price_product()
         elif menu == 0:
             break
     except ValueError:
-        print("\nProgram akcept only intiger from 1 to 4 and 0 for exit\n")
+        print("\nProgram akcept only intiger from 1 to 5 and 0 for exit\n")
