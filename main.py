@@ -62,7 +62,7 @@ def delete_product():
         print("\nWerehouse is empty\n")
 
 
-def update_product():
+def change_amount_product():
     if stock:
         found = False
         name = input("\nname product: ")
@@ -75,7 +75,9 @@ def update_product():
                     found = True
                     product.update_amount(new_amount)
                     save_to_json()
-                    print(f"\nProduct '{name}' succes update\n")
+                    print(
+                        f"\nProduct '{name}' amount succes update from {current_amount} on {new_amount} \n"
+                    )
                     break
                 except ValueError:
                     print("\nAmount must be intiger\n")
@@ -129,7 +131,7 @@ Your choose: """))
         elif menu == 3:
             delete_product()
         elif menu == 4:
-            update_product()
+            change_amount_product()
         elif menu == 5:
             change_price_product()
         elif menu == 0:
