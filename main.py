@@ -136,6 +136,30 @@ def increase_amount_product():
         print(f"\nWarehouse is empty\n")
 
 
+def decrease_amount_product():
+    if not stock:
+        print("\nWarehouse is empty\n")
+        return
+    name = input("Product name: ")
+    found = False
+    for product in stock:
+        if name == product.name:
+            try:
+                found = True
+                current_amount = product.amount
+                amount_to_decrease = int(input("How much to decrease: "))
+                product.decrease_amount(amount_to_decrease)
+                print(
+                    f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
+                )
+                save_to_json()
+                break
+            except ValueError as e:
+                print(e)
+    if not found:
+        print(f"\nProduct '{name}' not found\n")
+
+
 load_from_json()
 
 while True:
@@ -147,6 +171,7 @@ while True:
 4) Change amount product
 5) Change price product
 6) Increase amount product
+7) Decrease amount product
 0) Exit
 Your choose: """))
         if menu == 1:
@@ -161,6 +186,8 @@ Your choose: """))
             change_price_product()
         elif menu == 6:
             increase_amount_product()
+        elif menu == 7:
+            decrease_amount_product()
         elif menu == 0:
             break
     except ValueError:

@@ -16,3 +16,8 @@ class Product:
 
     def increase_amount(self, amount):
         self.amount += amount
+
+    def decrease_amount(self, amount):
+        if self.amount - amount < 0:
+            raise ValueError("Amount can't be under 0")
+        self.amount -= amount
