@@ -13,3 +13,6 @@ class Product:
     def update_price(self, price):
 
         self.price = price
+
+    def increase_amount(self, amount):
+        self.amount += amount

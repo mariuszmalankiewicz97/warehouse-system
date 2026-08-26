@@ -112,6 +112,30 @@ def change_price_product():
         print("\nWerehouse is empty\n")
 
 
+def increase_amount_product():
+    if stock:
+        found = False
+        name = input("Name product: ")
+        for product in stock:
+            if name == product.name:
+                try:
+                    found = True
+                    current_amount = product.amount
+                    amount_to_add = int(input("How much to add: "))
+                    product.increase_amount(amount_to_add)
+                    print(
+                        f"\nAmount increased from {current_amount} by {amount_to_add} to {product.amount}\n"
+                    )
+                    save_to_json()
+                    break
+                except ValueError:
+                    print("The value must be an integer")
+        if not found:
+            print(f"\nProduct name '{name}' don't exist\n")
+    else:
+        print(f"\nWarehouse is empty\n")
+
+
 load_from_json()
 
 while True:
@@ -122,6 +146,7 @@ while True:
 3) Del product
 4) Change amount product
 5) Change price product
+6) Increase amount product
 0) Exit
 Your choose: """))
         if menu == 1:
@@ -134,6 +159,8 @@ Your choose: """))
             change_amount_product()
         elif menu == 5:
             change_price_product()
+        elif menu == 6:
+            increase_amount_product()
         elif menu == 0:
             break
     except ValueError:
