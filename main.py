@@ -1,43 +1,31 @@
 import json
 
 from product import Product
+from warehouse import Warehouse
 
-# stock = []
-
-
-# def load_from_json():
-#     try:
-#         with open("products.json", "r") as f:
-#             products = json.load(f)
-#             for product_data in products:
-#                 product = Product(
-#                     product_data["name"], product_data["price"], product_data["amount"]
-#                 )
-#                 stock.append(product)
-#     except FileNotFoundError:
-#         save_to_json()
-#         print(f"\nFile name 'products.json' don't exist!, I create for you.\n")
+warehouse = Warehouse()
 
 
-# def save_to_json():
-#     temp_stock = []
-#     for product in stock:
-#         temp_stock.append(product.__dict__)
-#     with open("products.json", "w") as f:
-#         json.dump(temp_stock, f, indent=4)
+def load_from_json():
+    try:
+        with open("products.json", "r") as f:
+            products = json.load(f)
+            for product_data in products:
+                product = Product(
+                    product_data["name"], product_data["price"], product_data["amount"]
+                )
+                warehouse.stock.append(product)
+    except FileNotFoundError:
+        save_to_json()
+        print(f"\nFile name 'products.json' don't exist!, I create for you.\n")
 
 
-# def add_product():
-#     try:
-#         name = input("Name product: ")
-#         price = float(input("Price product: "))
-#         amount = int(input("Amount product: "))
-#         product = Product(name, price, amount)
-#         stock.append(product)
-#         save_to_json()
-#         print(f"\nProduct add success: {product}\n")
-#     except ValueError:
-#         print("\nPrice and amount must be a number\n")
+def save_to_json():
+    temp_stock = []
+    for product in warehouse.stock:
+        temp_stock.append(product.__dict__)
+    with open("products.json", "w") as f:
+        json.dump(temp_stock, f, indent=4)
 
 
 # def view_products():
@@ -177,38 +165,47 @@ from product import Product
 #         print(f"\nProduct name '{name}' not found")
 
 
-# load_from_json()
+load_from_json()
 
-# while True:
-#     try:
-#         menu = int(input("""\nWerehouse Menu:
-# 1) Add product
-# 2) View products
-# 3) Del product
-# 4) Change amount product
-# 5) Change price product
-# 6) Increase amount product
-# 7) Decrease amount product
-# 8) Total value product
-# 0) Exit
-# Your choose: """))
-#         if menu == 1:
-#             add_product()
-#         elif menu == 2:
-#             view_products()
-#         elif menu == 3:
-#             delete_product()
-#         elif menu == 4:
-#             change_amount_product()
-#         elif menu == 5:
-#             change_price_product()
-#         elif menu == 6:
-#             increase_amount_product()
-#         elif menu == 7:
-#             decrease_amount_product()
-#         elif menu == 8:
-#             total_value_product()
-#         elif menu == 0:
-#             break
-#     except ValueError:
-#         print("\nProgram akcept only intiger from 1 to 8 and 0 for exit\n")
+while True:
+    try:
+        menu = int(input("""\nWerehouse Menu:
+1) Add product
+2) View products
+3) Del product
+4) Change amount product
+5) Change price product
+6) Increase amount product
+7) Decrease amount product
+8) Total value product
+0) Exit
+Your choose: """))
+        if menu == 1:
+            try:
+                name = input("Name product: ")
+                price = float(input("Price product: "))
+                amount = int(input("Amount product: "))
+                product = Product(name, price, amount)
+                warehouse.add_product(product)
+                save_to_json()
+                print(f"\nProduct add: {product}\n")
+            except ValueError:
+                print("\nPrice and amount must be a number\n")
+        # elif menu == 2:
+        #     view_products()
+        # elif menu == 3:
+        #     delete_product()
+        # elif menu == 4:
+        #     change_amount_product()
+        # elif menu == 5:
+        #     change_price_product()
+        # elif menu == 6:
+        #     increase_amount_product()
+        # elif menu == 7:
+        #     decrease_amount_product()
+        # elif menu == 8:
+        #     total_value_product()
+        elif menu == 0:
+            break
+    except ValueError:
+        print("\nProgram akcept only intiger from 1 to 8 and 0 for exit\n")
