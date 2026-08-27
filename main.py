@@ -28,30 +28,6 @@ def save_to_json():
         json.dump(temp_stock, f, indent=4)
 
 
-# def decrease_amount_product():
-#     if not stock:
-#         print("\nWarehouse is empty\n")
-#         return
-#     name = input("Product name: ")
-#     found = False
-#     for product in stock:
-#         if name == product.name:
-#             try:
-#                 found = True
-#                 current_amount = product.amount
-#                 amount_to_decrease = int(input("How much to decrease: "))
-#                 product.decrease_amount(amount_to_decrease)
-#                 print(
-#                     f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
-#                 )
-#                 save_to_json()
-#                 break
-#             except ValueError as e:
-#                 print(e)
-#     if not found:
-#         print(f"\nProduct '{name}' not found\n")
-
-
 # def total_value_product():
 #     if not stock:
 #         print("\nWarehouse is empty\n")
@@ -154,7 +130,20 @@ Your choose: """))
                 except ValueError:
                     print("The value must be an integer")
 
-        # elif menu == 7:
-        #     decrease_amount_product()
+        elif menu == 7:
+            name = input("Product name: ")
+            product = warehouse.find_product(name)
+            if product:
+                try:
+                    found = True
+                    current_amount = product.amount
+                    amount_to_decrease = int(input("How much to decrease: "))
+                    product.decrease_amount(amount_to_decrease)
+                    print(
+                        f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
+                    )
+                    save_to_json()
+                except ValueError as e:
+                    print(e)
         # elif menu == 8:
         #     total_value_product()
