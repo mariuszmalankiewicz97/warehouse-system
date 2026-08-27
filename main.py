@@ -96,7 +96,6 @@ Your choose: """))
             product = warehouse.find_product(name)
             if product:
                 try:
-                    found = True
                     current_amount = product.amount
                     amount_to_decrease = int(input("How much to decrease: "))
                     product.decrease_amount(amount_to_decrease)
