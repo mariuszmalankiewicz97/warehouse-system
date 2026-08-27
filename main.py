@@ -156,6 +156,12 @@ while True:
 8) Total value product
 0) Exit
 Your choose: """))
+    except ValueError:
+        print("\nProgram akcept only integer from 1 to 8 and 0 for exit\n")
+    if menu < 0 or menu > 8:
+        print("\nProgram akcept only integer from 1 to 8 and 0 for exit\n")
+        continue
+    if not warehouse.check_stock():
         if menu == 1:
             try:
                 name = input("Name product: ")
@@ -167,14 +173,13 @@ Your choose: """))
                 print(f"\nProduct add: {product}\n")
             except ValueError:
                 print("\nPrice and amount must be a number\n")
-        elif menu == 2:
-            if warehouse.check_stock():
-                warehouse.view_products()
+    else:
+        if menu == 2:
+            warehouse.view_products()
         elif menu == 3:
-            if warehouse.check_stock():
-                name = input("\nName product to delete: ")
-                warehouse.delete_product(name)
-                save_to_json()
+            name = input("\nName product to delete: ")
+            warehouse.delete_product(name)
+            save_to_json()
         # elif menu == 4:
         #     change_amount_product()
         # elif menu == 5:
@@ -185,7 +190,5 @@ Your choose: """))
         #     decrease_amount_product()
         # elif menu == 8:
         #     total_value_product()
-        elif menu == 0:
-            break
-    except ValueError:
-        print("\nProgram akcept only intiger from 1 to 8 and 0 for exit\n")
+    if menu == 0:
+        break
