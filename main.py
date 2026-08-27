@@ -28,31 +28,6 @@ def save_to_json():
         json.dump(temp_stock, f, indent=4)
 
 
-# def change_price_product():
-#     if stock:
-#         found = False
-#         name = input("\nname product: ")
-#         for product in stock:
-#             if name == product.name:
-#                 try:
-#                     current_price = product.price
-#                     print(f"\nCurrent price: {current_price} \n")
-#                     found = True
-#                     new_price = float(input("New price: "))
-#                     product.update_price(new_price)
-#                     save_to_json()
-#                     print(
-#                         f"\nProduct '{name}' price succes update from {current_price} on {new_price}\n"
-#                     )
-#                     break
-#                 except ValueError:
-#                     print("\nPrice must be a float\n")
-#         if not found:
-#             print(f"\nProduct '{name}' not found\n")
-#     else:
-#         print("\nWerehouse is empty\n")
-
-
 # def increase_amount_product():
 #     if stock:
 #         found = False
@@ -173,8 +148,21 @@ Your choose: """))
             except ValueError:
                 print("\nAmount must be intiger\n")
 
-        # elif menu == 5:
-        #     change_price_product()
+        elif menu == 5:
+            name = input("\nname product: ")
+            product = warehouse.find_product(name)
+            if product:
+                try:
+                    current_price = product.price
+                    print(f"\nCurrent price: {current_price} \n")
+                    new_price = float(input("New price: "))
+                    product.update_price(new_price)
+                    save_to_json()
+                    print(
+                        f"\nProduct '{name}' price was update from {current_price} on {new_price}\n"
+                    )
+                except ValueError:
+                    print("\nPrice must be a float\n")
         # elif menu == 6:
         #     increase_amount_product()
         # elif menu == 7:
