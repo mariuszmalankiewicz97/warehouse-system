@@ -28,21 +28,6 @@ def save_to_json():
         json.dump(temp_stock, f, indent=4)
 
 
-# def total_value_product():
-#     if not stock:
-#         print("\nWarehouse is empty\n")
-#         return
-#     name = input("Product name: ")
-#     found = False
-#     for product in stock:
-#         if name == product.name:
-#             found = True
-#             print(f"\nTotal value product '{name}': {product.total_value()}\n")
-#             break
-#     if not found:
-#         print(f"\nProduct name '{name}' not found")
-
-
 load_from_json()
 
 while True:
@@ -145,5 +130,8 @@ Your choose: """))
                     save_to_json()
                 except ValueError as e:
                     print(e)
-        # elif menu == 8:
-        #     total_value_product()
+        elif menu == 8:
+            name = input("Product name: ")
+            product = warehouse.find_product(name)
+            if product:
+                print(f"\nTotal value product '{name}': {product.total_value()}\n")
