@@ -48,26 +48,27 @@ Your choose: """))
         continue
     if menu == 0:
         break
-    if not warehouse.check_stock():
-        if menu == 1:
-            try:
-                name = input("Name product: ")
-                price = float(input("Price product: "))
-                amount = int(input("Amount product: "))
-                product = Product(name, price, amount)
-                warehouse.add_product(product)
-                save_to_json()
-                print(f"\nProduct add: {product}\n")
-            except ValueError:
-                print("\nPrice and amount must be a number\n")
-    else:
-        if menu == 2:
+    elif menu == 1:
+        try:
+            name = input("Name product: ")
+            price = float(input("Price product: "))
+            amount = int(input("Amount product: "))
+            product = Product(name, price, amount)
+            warehouse.add_product(product)
+            save_to_json()
+            print(f"\nProduct add: {product}\n")
+        except ValueError:
+            print("\nPrice and amount must be a number\n")
+    elif menu == 2:
+        if warehouse.check_stock():
             warehouse.view_products()
-        elif menu == 3:
+    elif menu == 3:
+        if warehouse.check_stock():
             name = input("\nName product to delete: ")
             warehouse.delete_product(name)
             save_to_json()
-        elif menu == 4:
+    elif menu == 4:
+        if warehouse.check_stock():
             try:
                 name = input("Name product: ")
                 product = warehouse.find_product(name)
@@ -82,8 +83,8 @@ Your choose: """))
                     save_to_json()
             except ValueError:
                 print("\nAmount must be intiger\n")
-
-        elif menu == 5:
+    elif menu == 5:
+        if warehouse.check_stock():
             name = input("\nname product: ")
             product = warehouse.find_product(name)
             if product:
@@ -98,7 +99,8 @@ Your choose: """))
                     )
                 except ValueError:
                     print("\nPrice must be a float\n")
-        elif menu == 6:
+    elif menu == 6:
+        if warehouse.check_stock():
             name = input("Name product: ")
             product = warehouse.find_product(name)
             if product:
@@ -113,7 +115,8 @@ Your choose: """))
                 except ValueError:
                     print("The value must be an integer")
 
-        elif menu == 7:
+    elif menu == 7:
+        if warehouse.check_stock():
             name = input("Product name: ")
             product = warehouse.find_product(name)
             if product:
@@ -128,7 +131,8 @@ Your choose: """))
                     save_to_json()
                 except ValueError as e:
                     print(e)
-        elif menu == 8:
+    elif menu == 8:
+        if warehouse.check_stock():
             name = input("Product name: ")
             product = warehouse.find_product(name)
             if product:
