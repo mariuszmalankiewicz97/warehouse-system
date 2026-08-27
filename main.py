@@ -44,9 +44,7 @@ while True:
 0) Exit
 Your choose: """))
     except ValueError:
-        print("\nProgram akcept only integer from 1 to 8 and 0 for exit\n")
-    if menu < 0 or menu > 8:
-        print("\nProgram akcept only integer from 1 to 8 and 0 for exit\n")
+        print("\nProgram akcepts only integer from 0 to 8\n")
         continue
     if menu == 0:
         break
