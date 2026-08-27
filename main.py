@@ -1,34 +1,9 @@
-import json
-
 from product import Product
 from warehouse import Warehouse
 
 warehouse = Warehouse()
 
-
-def load_from_json():
-    try:
-        with open("products.json", "r") as f:
-            products = json.load(f)
-            for product_data in products:
-                product = Product(
-                    product_data["name"], product_data["price"], product_data["amount"]
-                )
-                warehouse.stock.append(product)
-    except FileNotFoundError:
-        save_to_json()
-        print(f"\nFile name 'products.json' don't exist!, I create for you.\n")
-
-
-def save_to_json():
-    temp_stock = []
-    for product in warehouse.stock:
-        temp_stock.append(product.__dict__)
-    with open("products.json", "w") as f:
-        json.dump(temp_stock, f, indent=4)
-
-
-load_from_json()
+warehouse.load_from_json()
 
 while True:
     try:
@@ -55,7 +30,7 @@ Your choose: """))
             amount = int(input("Amount product: "))
             product = Product(name, price, amount)
             warehouse.add_product(product)
-            save_to_json()
+            warehouse.save_to_json()
             print(f"\nProduct add: {product}\n")
         except ValueError:
             print("\nPrice and amount must be a number\n")
@@ -66,7 +41,7 @@ Your choose: """))
         if warehouse.check_stock():
             name = input("\nName product to delete: ")
             warehouse.delete_product(name)
-            save_to_json()
+            warehouse.save_to_json()
     elif menu == 4:
         if warehouse.check_stock():
             try:
@@ -80,7 +55,7 @@ Your choose: """))
                     print(
                         f"\nProduct '{name}' amount succes update from {current_amount} on {new_amount} \n"
                     )
-                    save_to_json()
+                    warehouse.save_to_json()
             except ValueError:
                 print("\nAmount must be intiger\n")
     elif menu == 5:
@@ -93,7 +68,7 @@ Your choose: """))
                     print(f"\nCurrent price: {current_price} \n")
                     new_price = float(input("New price: "))
                     product.update_price(new_price)
-                    save_to_json()
+                    warehouse.save_to_json()
                     print(
                         f"\nProduct '{name}' price was update from {current_price} on {new_price}\n"
                     )
@@ -111,7 +86,7 @@ Your choose: """))
                     print(
                         f"\nAmount increased from {current_amount} by {amount_to_add} to {product.amount}\n"
                     )
-                    save_to_json()
+                    warehouse.save_to_json()
                 except ValueError:
                     print("The value must be an integer")
 
@@ -128,7 +103,7 @@ Your choose: """))
                     print(
                         f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
                     )
-                    save_to_json()
+                    warehouse.save_to_json()
                 except ValueError as e:
                     print(e)
     elif menu == 8:
