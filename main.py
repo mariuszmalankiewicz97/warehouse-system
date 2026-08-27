@@ -28,31 +28,6 @@ def save_to_json():
         json.dump(temp_stock, f, indent=4)
 
 
-# def change_amount_product():
-#     if stock:
-#         found = False
-#         name = input("\nname product: ")
-#         for product in stock:
-#             if name == product.name:
-#                 try:
-#                     current_amount = product.amount
-#                     print(f"\nCurrent amount: {current_amount} \n")
-#                     new_amount = int(input("New amount: "))
-#                     found = True
-#                     product.update_amount(new_amount)
-#                     save_to_json()
-#                     print(
-#                         f"\nProduct '{name}' amount succes update from {current_amount} on {new_amount} \n"
-#                     )
-#                     break
-#                 except ValueError:
-#                     print("\nAmount must be intiger\n")
-#         if not found:
-#             print(f"\nProduct '{name}' not found\n")
-#     else:
-#         print("\nWerehouse is empty\n")
-
-
 # def change_price_product():
 #     if stock:
 #         found = False
@@ -161,6 +136,8 @@ Your choose: """))
     if menu < 0 or menu > 8:
         print("\nProgram akcept only integer from 1 to 8 and 0 for exit\n")
         continue
+    if menu == 0:
+        break
     if not warehouse.check_stock():
         if menu == 1:
             try:
@@ -180,8 +157,22 @@ Your choose: """))
             name = input("\nName product to delete: ")
             warehouse.delete_product(name)
             save_to_json()
-        # elif menu == 4:
-        #     change_amount_product()
+        elif menu == 4:
+            try:
+                name = input("Name product: ")
+                product = warehouse.find_product(name)
+                if product:
+                    current_amount = product.amount
+                    print(f"\nCurrent amount: {current_amount} \n")
+                    new_amount = int(input("New amount: "))
+                    product.update_amount(new_amount)
+                    print(
+                        f"\nProduct '{name}' amount succes update from {current_amount} on {new_amount} \n"
+                    )
+                    save_to_json()
+            except ValueError:
+                print("\nAmount must be intiger\n")
+
         # elif menu == 5:
         #     change_price_product()
         # elif menu == 6:
@@ -190,5 +181,3 @@ Your choose: """))
         #     decrease_amount_product()
         # elif menu == 8:
         #     total_value_product()
-    if menu == 0:
-        break
