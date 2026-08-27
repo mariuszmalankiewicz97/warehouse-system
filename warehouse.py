@@ -28,14 +28,11 @@ class Warehouse:
         return True
 
     def find_product(self, name):
-        found = False
         for product in self.stock:
             if name == product.name:
-                found = True
                 return product
-        if not found:
-            print(f"\nProduct: '{name}' not found\n")
-            return None
+        print(f"\nProduct: '{name}' not found\n")
+        return None
 
     def save_to_json(self):
         temp_stock = []
