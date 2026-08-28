@@ -41,7 +41,6 @@ Your choose: """))
         if warehouse.check_stock():
             name = input("\nName product to delete: ")
             warehouse.delete_product(name)
-            warehouse.save_to_json()
     elif menu == 4:
         if warehouse.check_stock():
             try:

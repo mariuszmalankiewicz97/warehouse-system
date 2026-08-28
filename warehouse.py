@@ -20,9 +20,9 @@ class Warehouse:
 
     def delete_product(self, name):
         product = self.find_product(name)
-
         if product:
             self.stock.remove(product)
+            self.save_to_json()
             print(f"\nProduct {name} was delete\n")
 
     def check_stock(self):
