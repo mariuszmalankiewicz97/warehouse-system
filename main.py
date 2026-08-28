@@ -36,8 +36,7 @@ Your choose: """))
         except ValueError:
             print("\nPrice and amount must be a number\n")
     elif menu == 2:
-        if warehouse.check_stock():
-            warehouse.view_products()
+        warehouse.view_products()
     elif menu == 3:
         if warehouse.check_stock():
             name = input("\nName product to delete: ")

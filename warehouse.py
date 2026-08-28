@@ -14,8 +14,9 @@ class Warehouse:
         print(f"\nProduct add: {product}\n")
 
     def view_products(self):
-        for product in self.stock:
-            print(f"Product: {product}")
+        if self.check_stock():
+            for product in self.stock:
+                print(f"Product: {product}")
 
     def delete_product(self, name):
         product = self.find_product(name)
