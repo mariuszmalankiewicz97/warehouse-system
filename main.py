@@ -21,7 +21,11 @@ Your choose: """))
     except ValueError:
         print("\nProgram akcepts only integer from 0 to 8\n")
         continue
-    if menu == 0:
+    if menu < 0 or menu > 8:
+        if menu < 0 or menu > 8:
+            print("\nProgram accepts only integer from 0 to 8\n")
+            continue
+    elif menu == 0:
         break
     elif menu == 1:
         try:
