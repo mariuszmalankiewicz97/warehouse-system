@@ -32,10 +32,7 @@ Your choose: """))
             name = input("Name product: ")
             price = float(input("Price product: "))
             amount = int(input("Amount product: "))
-            product = Product(name, price, amount)
-            warehouse.add_product(product)
-            warehouse.save_to_json()
-            print(f"\nProduct add: {product}\n")
+            warehouse.add_product(name, price, amount)
         except ValueError:
             print("\nPrice and amount must be a number\n")
     elif menu == 2:

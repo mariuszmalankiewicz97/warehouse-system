@@ -7,8 +7,11 @@ class Warehouse:
     def __init__(self):
         self.stock = []
 
-    def add_product(self, product):
+    def add_product(self, name, price, amount):
+        product = Product(name, price, amount)
         self.stock.append(product)
+        self.save_to_json()
+        print(f"\nProduct add: {product}\n")
 
     def view_products(self):
         for product in self.stock:
