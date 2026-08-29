@@ -7,18 +7,22 @@ class Warehouse:
     def __init__(self):
         self.stock = []
 
-    def add_product(self, product):
+    def add_product(self, name, price, amount):
+        product = Product(name, price, amount)
         self.stock.append(product)
+        self.save_to_json()
+        print(f"\nProduct add: {product}\n")
 
     def view_products(self):
-        for product in self.stock:
-            print(f"Product: {product}")
+        if self.check_stock():
+            for product in self.stock:
+                print(f"Product: {product}")
 
     def delete_product(self, name):
         product = self.find_product(name)
-
         if product:
             self.stock.remove(product)
+            self.save_to_json()
             print(f"\nProduct {name} was delete\n")
 
     def check_stock(self):
@@ -33,6 +37,45 @@ class Warehouse:
                 return product
         print(f"\nProduct: '{name}' not found\n")
         return None
+
+    def change_amount_product(self, product, new_amount):
+        current_amount = product.amount
+        print(f"\nCurrent amount: {current_amount} \n")
+        product.update_amount(new_amount)
+        print(
+            f"\nProduct '{product.name}' amount succes update from {current_amount} on {new_amount} \n"
+        )
+        self.save_to_json()
+
+    def change_price_product(self, product, new_price):
+        current_price = product.price
+        print(f"\nCurrent price: {current_price} \n")
+        product.update_price(new_price)
+        self.save_to_json()
+        print(
+            f"\nProduct '{product.name}' price was update from {current_price} on {new_price}\n"
+        )
+
+    def increase_amount_product(self, product, amount_to_add):
+        current_amount = product.amount
+        product.increase_amount(amount_to_add)
+        print(
+            f"\nAmount increased from {current_amount} by {amount_to_add} to {product.amount}\n"
+        )
+        self.save_to_json()
+
+    def decrease_amount_product(self, product, amount_to_decrease):
+        current_amount = product.amount
+        product.decrease_amount(amount_to_decrease)
+        print(
+            f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
+        )
+        self.save_to_json()
+
+    def total_value_product(self, name):
+        product = self.find_product(name)
+        if product:
+            print(f"\nTotal value product '{name}': {product.total_value()}\n")
 
     def save_to_json(self):
         temp_stock = []
