@@ -48,19 +48,7 @@ Your choose: """))
     elif menu == 5:
         if warehouse.check_stock():
             name = input("\nname product: ")
-            product = warehouse.find_product(name)
-            if product:
-                try:
-                    current_price = product.price
-                    print(f"\nCurrent price: {current_price} \n")
-                    new_price = float(input("New price: "))
-                    product.update_price(new_price)
-                    warehouse.save_to_json()
-                    print(
-                        f"\nProduct '{name}' price was update from {current_price} on {new_price}\n"
-                    )
-                except ValueError:
-                    print("\nPrice must be a float\n")
+            warehouse.change_price_product(name)
     elif menu == 6:
         if warehouse.check_stock():
             name = input("Name product: ")
