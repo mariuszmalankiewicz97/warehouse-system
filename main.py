@@ -43,20 +43,8 @@ Your choose: """))
             warehouse.delete_product(name)
     elif menu == 4:
         if warehouse.check_stock():
-            try:
-                name = input("Name product: ")
-                product = warehouse.find_product(name)
-                if product:
-                    current_amount = product.amount
-                    print(f"\nCurrent amount: {current_amount} \n")
-                    new_amount = int(input("New amount: "))
-                    product.update_amount(new_amount)
-                    print(
-                        f"\nProduct '{name}' amount succes update from {current_amount} on {new_amount} \n"
-                    )
-                    warehouse.save_to_json()
-            except ValueError:
-                print("\nAmount must be intiger\n")
+            name = input("Name product: ")
+            warehouse.change_amount_product(name)
     elif menu == 5:
         if warehouse.check_stock():
             name = input("\nname product: ")
