@@ -63,7 +63,13 @@ Your choose: """))
     elif menu == 6:
         if warehouse.check_stock():
             name = input("Name product: ")
-            warehouse.increase_amount_product(name)
+            product = warehouse.find_product(name)
+            if product:
+                try:
+                    amount_to_add = int(input("How much to add: "))
+                    warehouse.increase_amount_product(product, amount_to_add)
+                except ValueError:
+                    print("The value must be an integer")
     elif menu == 7:
         if warehouse.check_stock():
             name = input("Product name: ")

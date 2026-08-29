@@ -56,19 +56,13 @@ class Warehouse:
             f"\nProduct '{name}' price was update from {current_price} on {new_price}\n"
         )
 
-    def increase_amount_product(self, name):
-        product = self.find_product(name)
-        if product:
-            try:
-                current_amount = product.amount
-                amount_to_add = int(input("How much to add: "))
-                product.increase_amount(amount_to_add)
-                print(
-                    f"\nAmount increased from {current_amount} by {amount_to_add} to {product.amount}\n"
-                )
-                self.save_to_json()
-            except ValueError:
-                print("The value must be an integer")
+    def increase_amount_product(self, product, amount_to_add):
+        current_amount = product.amount
+        product.increase_amount(amount_to_add)
+        print(
+            f"\nAmount increased from {current_amount} by {amount_to_add} to {product.amount}\n"
+        )
+        self.save_to_json()
 
     def decrease_amount_product(self, name):
         product = self.find_product(name)
