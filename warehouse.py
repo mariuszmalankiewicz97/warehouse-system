@@ -64,19 +64,13 @@ class Warehouse:
         )
         self.save_to_json()
 
-    def decrease_amount_product(self, name):
-        product = self.find_product(name)
-        if product:
-            try:
-                current_amount = product.amount
-                amount_to_decrease = int(input("How much to decrease: "))
-                product.decrease_amount(amount_to_decrease)
-                print(
-                    f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
-                )
-                self.save_to_json()
-            except ValueError as e:
-                print(e)
+    def decrease_amount_product(self, product, amount_to_decrease):
+        current_amount = product.amount
+        product.decrease_amount(amount_to_decrease)
+        print(
+            f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
+        )
+        self.save_to_json()
 
     def total_value_product(self, name):
         product = self.find_product(name)

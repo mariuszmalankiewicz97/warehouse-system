@@ -73,7 +73,13 @@ Your choose: """))
     elif menu == 7:
         if warehouse.check_stock():
             name = input("Product name: ")
-            warehouse.decrease_amount_product(name)
+            product = warehouse.find_product(name)
+            if product:
+                try:
+                    amount_to_decrease = int(input("How much to decrease: "))
+                    warehouse.decrease_amount_product(product, amount_to_decrease)
+                except ValueError as e:
+                    print(e)
     elif menu == 8:
         if warehouse.check_stock():
             name = input("Product name: ")
