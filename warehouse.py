@@ -68,6 +68,20 @@ class Warehouse:
             except ValueError:
                 print("\nPrice must be a float\n")
 
+    def increase_amount_product(self, name):
+        product = self.find_product(name)
+        if product:
+            try:
+                current_amount = product.amount
+                amount_to_add = int(input("How much to add: "))
+                product.increase_amount(amount_to_add)
+                print(
+                    f"\nAmount increased from {current_amount} by {amount_to_add} to {product.amount}\n"
+                )
+                self.save_to_json()
+            except ValueError:
+                print("The value must be an integer")
+
     def save_to_json(self):
         temp_stock = []
         for product in self.stock:

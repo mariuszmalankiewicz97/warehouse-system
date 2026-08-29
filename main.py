@@ -52,19 +52,7 @@ Your choose: """))
     elif menu == 6:
         if warehouse.check_stock():
             name = input("Name product: ")
-            product = warehouse.find_product(name)
-            if product:
-                try:
-                    current_amount = product.amount
-                    amount_to_add = int(input("How much to add: "))
-                    product.increase_amount(amount_to_add)
-                    print(
-                        f"\nAmount increased from {current_amount} by {amount_to_add} to {product.amount}\n"
-                    )
-                    warehouse.save_to_json()
-                except ValueError:
-                    print("The value must be an integer")
-
+            warehouse.increase_amount_product(name)
     elif menu == 7:
         if warehouse.check_stock():
             name = input("Product name: ")
