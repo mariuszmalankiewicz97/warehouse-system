@@ -38,20 +38,14 @@ class Warehouse:
         print(f"\nProduct: '{name}' not found\n")
         return None
 
-    def change_amount_product(self, name):
-        product = self.find_product(name)
-        if product:
-            try:
-                current_amount = product.amount
-                print(f"\nCurrent amount: {current_amount} \n")
-                new_amount = int(input("New amount: "))
-                product.update_amount(new_amount)
-                print(
-                    f"\nProduct '{name}' amount succes update from {current_amount} on {new_amount} \n"
-                )
-                self.save_to_json()
-            except ValueError:
-                print("\nAmount must be intiger\n")
+    def change_amount_product(self, product, name, new_amount):
+        current_amount = product.amount
+        print(f"\nCurrent amount: {current_amount} \n")
+        product.update_amount(new_amount)
+        print(
+            f"\nProduct '{name}' amount succes update from {current_amount} on {new_amount} \n"
+        )
+        self.save_to_json()
 
     def change_price_product(self, name):
         product = self.find_product(name)

@@ -1,4 +1,3 @@
-from product import Product
 from warehouse import Warehouse
 
 warehouse = Warehouse()
@@ -44,11 +43,18 @@ Your choose: """))
     elif menu == 4:
         if warehouse.check_stock():
             name = input("Name product: ")
-            warehouse.change_amount_product(name)
+            product = warehouse.find_product(name)
+            if product:
+                try:
+                    new_amount = int(input("New amount: "))
+                    warehouse.change_amount_product(product, name, new_amount)
+                except ValueError:
+                    print("\nAmount must be intiger\n")
     elif menu == 5:
         if warehouse.check_stock():
             name = input("\nname product: ")
             warehouse.change_price_product(name)
+
     elif menu == 6:
         if warehouse.check_stock():
             name = input("Name product: ")
@@ -57,7 +63,6 @@ Your choose: """))
         if warehouse.check_stock():
             name = input("Product name: ")
             warehouse.decrease_amount_product(name)
-
     elif menu == 8:
         if warehouse.check_stock():
             name = input("Product name: ")
