@@ -61,6 +61,4 @@ Your choose: """))
     elif menu == 8:
         if warehouse.check_stock():
             name = input("Product name: ")
-            product = warehouse.find_product(name)
-            if product:
-                print(f"\nTotal value product '{name}': {product.total_value()}\n")
+            warehouse.total_value_product(name)

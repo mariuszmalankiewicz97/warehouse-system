@@ -96,6 +96,11 @@ class Warehouse:
             except ValueError as e:
                 print(e)
 
+    def total_value_product(self, name):
+        product = self.find_product(name)
+        if product:
+            print(f"\nTotal value product '{name}': {product.total_value()}\n")
+
     def save_to_json(self):
         temp_stock = []
         for product in self.stock:
