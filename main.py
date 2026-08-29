@@ -21,9 +21,8 @@ Your choose: """))
         print("\nProgram akcepts only integer from 0 to 8\n")
         continue
     if menu < 0 or menu > 8:
-        if menu < 0 or menu > 8:
-            print("\nProgram accepts only integer from 0 to 8\n")
-            continue
+        print("\nProgram accepts only integer from 0 to 8\n")
+        continue
     elif menu == 0:
         break
     elif menu == 1:
@@ -47,7 +46,7 @@ Your choose: """))
             if product:
                 try:
                     new_amount = int(input("New amount: "))
-                    warehouse.change_amount_product(product, name, new_amount)
+                    warehouse.change_amount_product(product, new_amount)
                 except ValueError:
                     print("\nAmount must be intiger\n")
     elif menu == 5:
@@ -57,7 +56,7 @@ Your choose: """))
             if product:
                 try:
                     new_price = float(input("New price: "))
-                    warehouse.change_price_product(product, name, new_price)
+                    warehouse.change_price_product(product, new_price)
                 except ValueError:
                     print("\nPrice must be a float\n")
     elif menu == 6:

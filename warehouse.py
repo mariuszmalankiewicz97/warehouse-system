@@ -38,22 +38,22 @@ class Warehouse:
         print(f"\nProduct: '{name}' not found\n")
         return None
 
-    def change_amount_product(self, product, name, new_amount):
+    def change_amount_product(self, product, new_amount):
         current_amount = product.amount
         print(f"\nCurrent amount: {current_amount} \n")
         product.update_amount(new_amount)
         print(
-            f"\nProduct '{name}' amount succes update from {current_amount} on {new_amount} \n"
+            f"\nProduct '{product.name}' amount succes update from {current_amount} on {new_amount} \n"
         )
         self.save_to_json()
 
-    def change_price_product(self, product, name, new_price):
+    def change_price_product(self, product, new_price):
         current_price = product.price
         print(f"\nCurrent price: {current_price} \n")
         product.update_price(new_price)
         self.save_to_json()
         print(
-            f"\nProduct '{name}' price was update from {current_price} on {new_price}\n"
+            f"\nProduct '{product.name}' price was update from {current_price} on {new_price}\n"
         )
 
     def increase_amount_product(self, product, amount_to_add):
