@@ -56,18 +56,8 @@ Your choose: """))
     elif menu == 7:
         if warehouse.check_stock():
             name = input("Product name: ")
-            product = warehouse.find_product(name)
-            if product:
-                try:
-                    current_amount = product.amount
-                    amount_to_decrease = int(input("How much to decrease: "))
-                    product.decrease_amount(amount_to_decrease)
-                    print(
-                        f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
-                    )
-                    warehouse.save_to_json()
-                except ValueError as e:
-                    print(e)
+            warehouse.decrease_amount_product(name)
+
     elif menu == 8:
         if warehouse.check_stock():
             name = input("Product name: ")

@@ -82,6 +82,20 @@ class Warehouse:
             except ValueError:
                 print("The value must be an integer")
 
+    def decrease_amount_product(self, name):
+        product = self.find_product(name)
+        if product:
+            try:
+                current_amount = product.amount
+                amount_to_decrease = int(input("How much to decrease: "))
+                product.decrease_amount(amount_to_decrease)
+                print(
+                    f"\nDecrease amount from {current_amount} by {amount_to_decrease} to {product.amount}\n"
+                )
+                self.save_to_json()
+            except ValueError as e:
+                print(e)
+
     def save_to_json(self):
         temp_stock = []
         for product in self.stock:
