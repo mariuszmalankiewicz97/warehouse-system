@@ -53,8 +53,13 @@ Your choose: """))
     elif menu == 5:
         if warehouse.check_stock():
             name = input("\nname product: ")
-            warehouse.change_price_product(name)
-
+            product = warehouse.find_product(name)
+            if product:
+                try:
+                    new_price = float(input("New price: "))
+                    warehouse.change_price_product(product, name, new_price)
+                except ValueError:
+                    print("\nPrice must be a float\n")
     elif menu == 6:
         if warehouse.check_stock():
             name = input("Name product: ")

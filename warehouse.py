@@ -47,20 +47,14 @@ class Warehouse:
         )
         self.save_to_json()
 
-    def change_price_product(self, name):
-        product = self.find_product(name)
-        if product:
-            try:
-                current_price = product.price
-                print(f"\nCurrent price: {current_price} \n")
-                new_price = float(input("New price: "))
-                product.update_price(new_price)
-                self.save_to_json()
-                print(
-                    f"\nProduct '{name}' price was update from {current_price} on {new_price}\n"
-                )
-            except ValueError:
-                print("\nPrice must be a float\n")
+    def change_price_product(self, product, name, new_price):
+        current_price = product.price
+        print(f"\nCurrent price: {current_price} \n")
+        product.update_price(new_price)
+        self.save_to_json()
+        print(
+            f"\nProduct '{name}' price was update from {current_price} on {new_price}\n"
+        )
 
     def increase_amount_product(self, name):
         product = self.find_product(name)
