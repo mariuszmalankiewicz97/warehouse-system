@@ -1,12 +1,13 @@
+from product import Product
 from warehouse import Warehouse
 
-warehouse = Warehouse()
+warehouse: Warehouse = Warehouse()
 
 warehouse.load_from_json()
 
 while True:
     try:
-        menu = int(input("""\nWerehouse Menu:
+        menu: int = int(input("""\nWerehouse Menu:
 1) Add product
 2) View products
 3) Del product
@@ -27,9 +28,9 @@ Your choose: """))
         break
     elif menu == 1:
         try:
-            name = input("Name product: ")
-            price = float(input("Price product: "))
-            amount = int(input("Amount product: "))
+            name: str = input("Name product: ")
+            price: float = float(input("Price product: "))
+            amount: int = int(input("Amount product: "))
             warehouse.add_product(name, price, amount)
         except ValueError:
             print("\nPrice and amount must be a number\n")
@@ -37,49 +38,49 @@ Your choose: """))
         warehouse.view_products()
     elif menu == 3:
         if warehouse.check_stock():
-            name = input("\nName product to delete: ")
+            name: str = input("\nName product to delete: ")
             warehouse.delete_product(name)
     elif menu == 4:
         if warehouse.check_stock():
-            name = input("Name product: ")
-            product = warehouse.find_product(name)
+            name: str = input("Name product: ")
+            product: Product | None = warehouse.find_product(name)
             if product:
                 try:
-                    new_amount = int(input("New amount: "))
+                    new_amount: int = int(input("New amount: "))
                     warehouse.change_amount_product(product, new_amount)
                 except ValueError:
                     print("\nAmount must be intiger\n")
     elif menu == 5:
         if warehouse.check_stock():
-            name = input("\nname product: ")
-            product = warehouse.find_product(name)
+            name: str = input("\nname product: ")
+            product: Product | None = warehouse.find_product(name)
             if product:
                 try:
-                    new_price = float(input("New price: "))
+                    new_price: float = float(input("New price: "))
                     warehouse.change_price_product(product, new_price)
                 except ValueError:
                     print("\nPrice must be a float\n")
     elif menu == 6:
         if warehouse.check_stock():
-            name = input("Name product: ")
-            product = warehouse.find_product(name)
+            name: str = input("Name product: ")
+            product: Product | None = warehouse.find_product(name)
             if product:
                 try:
-                    amount_to_add = int(input("How much to add: "))
+                    amount_to_add: int = int(input("How much to add: "))
                     warehouse.increase_amount_product(product, amount_to_add)
                 except ValueError:
                     print("The value must be an integer")
     elif menu == 7:
         if warehouse.check_stock():
-            name = input("Product name: ")
-            product = warehouse.find_product(name)
+            name: str = input("Product name: ")
+            product: Product | None = warehouse.find_product(name)
             if product:
                 try:
-                    amount_to_decrease = int(input("How much to decrease: "))
+                    amount_to_decrease: int = int(input("How much to decrease: "))
                     warehouse.decrease_amount_product(product, amount_to_decrease)
                 except ValueError as e:
                     print(e)
     elif menu == 8:
         if warehouse.check_stock():
-            name = input("Product name: ")
+            name: str = input("Product name: ")
             warehouse.total_value_product(name)

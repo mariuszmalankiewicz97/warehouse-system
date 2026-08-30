@@ -4,41 +4,41 @@ from product import Product
 
 
 class Warehouse:
-    def __init__(self):
-        self.stock = []
+    def __init__(self) -> None:
+        self.stock: list[Product] = []
 
-    def add_product(self, name, price, amount):
+    def add_product(self, name: str, price: float, amount: int) -> None:
         product = Product(name, price, amount)
         self.stock.append(product)
         self.save_to_json()
         print(f"\nProduct add: {product}\n")
 
-    def view_products(self):
+    def view_products(self) -> None:
         if self.check_stock():
             for product in self.stock:
                 print(f"Product: {product}")
 
-    def delete_product(self, name):
+    def delete_product(self, name: str) -> None:
         product = self.find_product(name)
         if product:
             self.stock.remove(product)
             self.save_to_json()
             print(f"\nProduct {name} was delete\n")
 
-    def check_stock(self):
+    def check_stock(self) -> bool:
         if not self.stock:
             print("\nWarehouse is empty\n")
             return False
         return True
 
-    def find_product(self, name):
+    def find_product(self, name: str) -> Product | None:
         for product in self.stock:
             if name == product.name:
                 return product
         print(f"\nProduct: '{name}' not found\n")
         return None
 
-    def change_amount_product(self, product, new_amount):
+    def change_amount_product(self, product: Product, new_amount: int) -> None:
         current_amount = product.amount
         print(f"\nCurrent amount: {current_amount} \n")
         product.update_amount(new_amount)
@@ -47,7 +47,7 @@ class Warehouse:
         )
         self.save_to_json()
 
-    def change_price_product(self, product, new_price):
+    def change_price_product(self, product: Product, new_price: float) -> None:
         current_price = product.price
         print(f"\nCurrent price: {current_price} \n")
         product.update_price(new_price)
@@ -56,7 +56,7 @@ class Warehouse:
             f"\nProduct '{product.name}' price was update from {current_price} on {new_price}\n"
         )
 
-    def increase_amount_product(self, product, amount_to_add):
+    def increase_amount_product(self, product: Product, amount_to_add: int) -> None:
         current_amount = product.amount
         product.increase_amount(amount_to_add)
         print(
@@ -64,7 +64,9 @@ class Warehouse:
         )
         self.save_to_json()
 
-    def decrease_amount_product(self, product, amount_to_decrease):
+    def decrease_amount_product(
+        self, product: Product, amount_to_decrease: int
+    ) -> None:
         current_amount = product.amount
         product.decrease_amount(amount_to_decrease)
         print(
@@ -72,24 +74,24 @@ class Warehouse:
         )
         self.save_to_json()
 
-    def total_value_product(self, name):
+    def total_value_product(self, name: str) -> None:
         product = self.find_product(name)
         if product:
             print(f"\nTotal value product '{name}': {product.total_value()}\n")
 
-    def save_to_json(self):
-        temp_stock = []
+    def save_to_json(self) -> None:
+        temp_stock: list[dict] = []
         for product in self.stock:
             temp_stock.append(product.__dict__)
         with open("products.json", "w") as f:
             json.dump(temp_stock, f, indent=4)
 
-    def load_from_json(self):
+    def load_from_json(self) -> None:
         try:
             with open("products.json", "r") as f:
-                products = json.load(f)
+                products: list[dict] = json.load(f)
                 for product_data in products:
-                    product = Product(
+                    product: Product = Product(
                         product_data["name"],
                         product_data["price"],
                         product_data["amount"],
