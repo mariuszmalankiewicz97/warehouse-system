@@ -9,9 +9,10 @@ class Warehouse:
 
     def add_product(self, name: str, price: float, amount: int) -> None:
         product = Product(name, price, amount)
-        self.stock.append(product)
-        self.save_to_json()
-        print(f"\nProduct add: {product}\n")
+        if self._validate_duplicate_product(product):
+            self.stock.append(product)
+            self.save_to_json()
+            print(f"\nProduct add: {product}\n")
 
     def view_products(self) -> None:
         if self.check_stock():
@@ -32,6 +33,7 @@ class Warehouse:
         return True
 
     def find_product(self, name: str) -> Product | None:
+        name = name.lower()
         for product in self.stock:
             if name == product.name:
                 return product
@@ -87,6 +89,7 @@ class Warehouse:
             json.dump(temp_stock, f, indent=4)
 
     def load_from_json(self) -> None:
+        self.stock: list[Product] = []
         try:
             with open("products.json", "r") as f:
                 products: list[dict] = json.load(f)
@@ -100,3 +103,15 @@ class Warehouse:
         except FileNotFoundError:
             self.save_to_json()
             print(f"\nFile name 'products.json' don't exist!, I create for you.\n")
+
+    def _validate_duplicate_product(self, product: Product) -> bool | None:
+        found = False
+        for product_in_stock in self.stock:
+            print(product_in_stock.name)
+            print(product.name)
+
+            if product.name == product_in_stock.name:
+                found = True
+                raise ValueError("Product exist in stock")
+        if not found:
+            return True
